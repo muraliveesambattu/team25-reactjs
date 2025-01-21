@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var user = {
+            fname: "Kiran",
+            lname: "Kumar",
+            email: "kiran@gmail.com"
+        }
+
+        user.state = "Andhra Pradesh";
+        user.pin = "560011";
+
+        user['role'] = "Front End Developer";
+        user['language'] = "Javascript";
+
+        function displayuser(){
+            delete user.pin;
+            for(a in user){
+                document.write(user[a]+"<br/>")
+            }
+        }
+
+        displayuser()
+    </script>
+</body>
+
+</html>
