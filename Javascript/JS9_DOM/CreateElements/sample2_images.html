@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <img src="" alt="" width="">
+    <div id="mydiv">
+
+    </div>
+
+    <script>
+        var imageAddress = [
+            "https://media.istockphoto.com/id/1198394943/photo/tea-plantation-on-the-early-morning.jpg?s=612x612&w=is&k=20&c=F_jsHm9QIi3WXlScuSSiQVtmV5gVjTXZm7oyUkwlooE=",
+            "https://media.istockphoto.com/id/1161878589/photo/bueatiful-tea-plantation-on-mountain.jpg?s=612x612&w=is&k=20&c=3tmEG_OOOrHIG3t5e2_RFQRY4QeJXSS2QxefTm4Hy4o=",
+            "https://media.istockphoto.com/id/476819024/photo/tea-plantations-under-sky.jpg?s=612x612&w=is&k=20&c=dXwp5UPW6f0vpWGlts7sv7z8HletfMQY0oWiys7-k7M=",
+            "https://media.istockphoto.com/id/1225361936/photo/tea-plantation-on-the-top-of-the-mountain.jpg?s=612x612&w=is&k=20&c=ca7FG-dGFdBklx_iC5axUS8D4xbISCvnlVtmU1w7oqY=",
+            "https://media.istockphoto.com/id/1443030301/photo/scenic-green-team-plantation-farm-land-at-sunny-day.jpg?s=612x612&w=is&k=20&c=SDLfhGYPEXpxM65TnwQs6mg8_W9-DcoUgzfV65Dn1s0=",
+        ]
+        imageAddress.forEach(function (val) {
+            console.log(val)
+            var myImage = document.createElement("img");
+            myImage.setAttribute("src", val)
+            myImage.setAttribute("width", "200px")
+            document.getElementById("mydiv").appendChild(myImage)
+        })
+
+    </script>
+</body>
+
+</html>
