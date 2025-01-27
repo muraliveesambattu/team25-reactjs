@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Signup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Form Column -->
+    <div class="column">
+      <h1>Create E-Commerce Account</h1>
+      <form>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="gender">Gender</label>
+        <div>
+          <label><input type="radio" name="gender" value="male" required> Male</label><br>
+          <label><input type="radio" name="gender" value="female" required> Female</label>
+        </div>
+
+        <label for="account-type">Account Type</label>
+        <select id="account-type" name="account-type" required>
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- Table Column -->
+    <div class="column">
+      <h1>User Accounts</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Account Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>Buyer</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Jane Smith</td>
+            <td>Seller</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

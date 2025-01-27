@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Signup</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Form Column -->
+    <div class="column">
+      <h1>Social Media Signup</h1>
+      <form>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label>Gender</label>
+        <div>
+          <label><input type="radio" name="gender" value="male" required> Male</label><br>
+          <label><input type="radio" name="gender" value="female" required> Female</label>
+        </div>
+
+        <label>Interests</label>
+        <div>
+          <label><input type="checkbox" name="interests" value="tech"> Technology</label><br>
+          <label><input type="checkbox" name="interests" value="sports"> Sports</label><br>
+          <label><input type="checkbox" name="interests" value="music"> Music</label>
+        </div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- Table Column -->
+    <div class="column">
+      <h1>Registered Users</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>JohnDoe123</td>
+            <td>john.doe@example.com</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>JaneSmith99</td>
+            <td>jane.smith@example.com</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
