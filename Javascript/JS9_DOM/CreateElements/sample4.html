@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var totalNoOfImages = prompt("How No Of Images You Want ?");
+        console.log(totalNoOfImages)
+        for(i=1;i<=totalNoOfImages;i++){
+            var myImge = document.createElement("img")
+            myImge.setAttribute("src","https://randomuser.me/api/portraits/men/"+i+".jpg")
+            document.body.appendChild(myImge)
+        }
+    </script>
+</body>
+</html>
