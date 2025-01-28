@@ -128,4 +128,8 @@ body {
   .delete-btn:hover {
     background-color: #c82333;
   }
+
+  #updateBtn{
+    display: none;
+  }
   

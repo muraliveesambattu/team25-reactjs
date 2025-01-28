@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var students = ["Ram", "Ravi", "Sam", "Sundar", "Kiran"]
+
+        // approach 1 
+        // students.splice(2,1)
+
+        // var filteredArray = students.filter(function (val){
+        //     return val !== "Sam"
+        // })
+
+        var filteredArray = students.filter(function (val,index){
+            return index !== 2;
+        })
+
+        document.write(students+"<br/>")
+        document.write(filteredArray)
+    </script>
+</body>
+
+</html>

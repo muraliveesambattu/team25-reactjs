@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Registration</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="container">
     <!-- Form Column -->
@@ -13,19 +15,20 @@
       <h1>Event Registration</h1>
       <form>
         <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        <input type="text" id="fullName" name="name" placeholder="Enter your full name" required>
 
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-        <label>Preferences</label>
+        <!-- <label>Preferences</label>
         <div>
           <label><input type="checkbox" name="preference" value="workshop"> Workshop</label><br>
           <label><input type="checkbox" name="preference" value="seminar"> Seminar</label><br>
           <label><input type="checkbox" name="preference" value="networking"> Networking Event</label>
-        </div>
+        </div> -->
 
-        <button type="submit">Register</button>
+        <button type="button" onclick="registerUser()" id="registerBtn">Register</button>
+        <button type="button" onclick="updateUser()" id="updateBtn">Update</button>
       </form>
     </div>
 
@@ -37,11 +40,12 @@
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Action</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>John Doe</td>
             <td>john@example.com</td>
             <td>
@@ -56,10 +60,109 @@
               <button class="edit-btn">Edit</button>
               <button class="delete-btn">Delete</button>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
   </div>
+
+  <script>
+    var allUsers = [
+      {
+        fullName: "Ram ",
+        email: "ram@gmail.com"
+      },
+      {
+        fullName: "kiran ",
+        email: "kiran@gmail.com"
+      },
+      {
+        fullName: "Kumar ",
+        email: "kumar@gmail.com"
+      }
+    ]
+    function registerUser() {
+      var fullName = document.getElementById("fullName").value;
+      var email = document.getElementById("email").value;
+      // If Key & Values are same in An Object , We can mention Single Word Only 
+      var user = {
+        fullName,
+        email
+      }
+      allUsers.push(user)
+
+      document.getElementById("fullName").value = "";
+      document.getElementById("email").value = ""
+      displayUsersInTable()
+    }
+
+
+    function displayUsersInTable() {
+      document.querySelector("tbody").innerHTML = "";
+      allUsers.forEach(function (user, index) {
+        var myTr = document.createElement("tr");
+        for (a in user) {
+          var myTd = document.createElement("td")
+          myTd.innerHTML = user[a]
+          myTr.appendChild(myTd)
+        }
+
+        var editTd = document.createElement("td");
+        var editBtn = document.createElement("button")
+        editBtn.innerHTML = "Edit";
+        editBtn.setAttribute("class", "edit-btn")
+        editBtn.setAttribute("onclick", "editUser(" + index + ")")
+        editTd.appendChild(editBtn)
+        myTr.appendChild(editTd)
+
+        var deleteTd = document.createElement("td");
+        var deleteBtn = document.createElement("button");
+        deleteBtn.setAttribute("class", "delete-btn")
+        deleteBtn.setAttribute("onclick", "deleteUser(" + index + ")")
+        deleteBtn.innerHTML = "Delete";
+        deleteTd.appendChild(deleteBtn);
+
+        myTr.appendChild(deleteTd)
+        document.querySelector("tbody").appendChild(myTr)
+      })
+    }
+
+    displayUsersInTable();
+
+    function deleteUser(i) {
+      console.log("deleteUser Called !! " + i)
+      allUsers.splice(i, 1);
+      displayUsersInTable();
+
+    }
+    var gIndex;
+    function editUser(i) {
+      gIndex = i;
+      document.getElementById("fullName").value = allUsers[i].fullName;
+      document.getElementById("email").value = allUsers[i].email
+
+      document.getElementById("updateBtn").style.display = "block"
+      document.getElementById("registerBtn").style.display = "none"
+    }
+
+
+    function updateUser() {
+      var fullName = document.getElementById("fullName").value;
+      var email = document.getElementById("email").value;
+      var user = {
+        fullName,
+        email
+      }
+
+      allUsers[gIndex] = user;
+      displayUsersInTable();
+       document.getElementById("fullName").value = "";
+      document.getElementById("email").value = ""
+
+       document.getElementById("updateBtn").style.display = "none"
+      document.getElementById("registerBtn").style.display = "block"
+    }
+  </script>
 </body>
+
 </html>
