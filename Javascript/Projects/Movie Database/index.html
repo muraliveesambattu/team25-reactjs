@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Database</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 95%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            flex: 30%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .movie-container {
+            flex: 70%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-group input, .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .movie-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        td button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        td .view {
+            background: #28a745;
+            color: white;
+        }
+
+        td .delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        td .view:hover {
+            background: #218838;
+        }
+
+        td .delete:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .form-container, .movie-container {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Movie Database</h1>
+
+        <div class="content">
+            <!-- Left Column: Movie Entry Form (30%) -->
+            <div class="form-container">
+                <h2>Add Movie</h2>
+                <form id="movie-form">
+                    <label for="title">Movie Title:</label>
+                    <input type="text" id="title" required>
+
+                    <label for="director">Director:</label>
+                    <input type="text" id="director" required>
+
+                    <label for="releaseYear">Release Year:</label>
+                    <input type="number" id="releaseYear" required>
+
+                    <label for="genre">Genre:</label>
+                    <select id="genre">
+                        <option value="Action">Action</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Horror">Horror</option>
+                    </select>
+
+                    <label>Rating:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="rate1" name="rating" value="1">
+                        <label for="rate1">1</label>
+
+                        <input type="radio" id="rate2" name="rating" value="2">
+                        <label for="rate2">2</label>
+
+                        <input type="radio" id="rate3" name="rating" value="3">
+                        <label for="rate3">3</label>
+
+                        <input type="radio" id="rate4" name="rating" value="4">
+                        <label for="rate4">4</label>
+
+                        <input type="radio" id="rate5" name="rating" value="5">
+                        <label for="rate5">5</label>
+
+                        <input type="radio" id="rate6" name="rating" value="6">
+                        <label for="rate6">6</label>
+
+                        <input type="radio" id="rate7" name="rating" value="7">
+                        <label for="rate7">7</label>
+
+                        <input type="radio" id="rate8" name="rating" value="8">
+                        <label for="rate8">8</label>
+
+                        <input type="radio" id="rate9" name="rating" value="9">
+                        <label for="rate9">9</label>
+
+                        <input type="radio" id="rate10" name="rating" value="10">
+                        <label for="rate10">10</label>
+                    </div>
+
+                    <label>Actors:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="leo" value="Leonardo DiCaprio">
+                        <label for="leo">Leonardo DiCaprio</label>
+
+                        <input type="checkbox" id="robert" value="Robert Downey Jr.">
+                        <label for="robert">Robert Downey Jr.</label>
+
+                        <input type="checkbox" id="scarlett" value="Scarlett Johansson">
+                        <label for="scarlett">Scarlett Johansson</label>
+
+                        <input type="checkbox" id="margot" value="Margot Robbie">
+                        <label for="margot">Margot Robbie</label>
+
+                        <input type="checkbox" id="tom" value="Tom Hanks">
+                        <label for="tom">Tom Hanks</label>
+                    </div>
+
+                    <button type="submit">Add Movie</button>
+                </form>
+            </div>
+
+            <!-- Right Column: Movie List (70%) -->
+            <div class="movie-container">
+                <h2>Movie List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Director</th>
+                            <th>Year</th>
+                            <th>Genre</th>
+                            <th>Rating</th>
+                            <th>Actors</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="movie-list">
+                        <tr>
+                            <td>Inception</td>
+                            <td>Christopher Nolan</td>
+                            <td>2010</td>
+                            <td>Sci-Fi</td>
+                            <td>9</td>
+                            <td>Leonardo DiCaprio</td>
+                            <td>
+                                <button class="view">View</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

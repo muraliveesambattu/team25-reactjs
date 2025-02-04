@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="">Subjects </label> <br>
+    <input type="checkbox" name="subject" value="HTML"> HTML
+    <input type="checkbox" name="subject" value="CSS"> CSS
+    <input type="checkbox" name="subject" value="JS"> JS
+    <input type="checkbox" name="subject" value="ReactJS"> ReactJS
+    <input type="checkbox" name="subject" value="Redux">Redux
+
+    <button onclick="getSelectedValues()">Get Selected Values</button>
+    <script>
+        var subjetcts = []
+
+
+        function getSelectedValues() {
+            var allCheckBoxes = document.getElementsByName("subject")
+            for (i = 0; i < allCheckBoxes.length; i++) {
+                if (allCheckBoxes[i].checked == true) {
+                    subjetcts.push(allCheckBoxes[i].value)
+                }
+            }
+            console.log(subjetcts)
+        }
+
+    </script>
+</body>
+
+</html>

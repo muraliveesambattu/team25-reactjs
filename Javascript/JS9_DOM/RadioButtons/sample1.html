@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <input type="radio" name="gender" value="Others"> Others
+
+    <script>
+        // Getting Value From Radio Button
+        // for (i = 0; i < allRadioBtns.length; i++) {
+        //     if (allRadioBtns[i].checked == true) {
+        //         console.log(allRadioBtns[i].value)
+        //     }
+        // }
+        var allRadioBtns = document.getElementsByName("gender")
+        for (i = 0; i < allRadioBtns.length; i++) {
+            if (allRadioBtns[i].value == "Others") {
+                allRadioBtns[i].checked = true
+            }
+        }
+    </script>
+</body>
+
+</html>

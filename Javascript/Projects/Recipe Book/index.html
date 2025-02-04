@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 95%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            flex: 30%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .recipe-container {
+            flex: 70%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .recipe-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        td button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        td .view {
+            background: #28a745;
+            color: white;
+        }
+
+        td .delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        td .view:hover {
+            background: #218838;
+        }
+
+        td .delete:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .form-container, .recipe-container {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Recipe Book</h1>
+
+        <div class="content">
+            <!-- Left Column: Recipe Entry Form (30%) -->
+            <div class="form-container">
+                <h2>Add Recipe</h2>
+                <form id="recipe-form">
+                    <label for="name">Recipe Name:</label>
+                    <input type="text" id="name" required>
+
+                    <label>Ingredients:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="flour" value="Flour">
+                        <label for="flour">Flour</label>
+
+                        <input type="checkbox" id="sugar" value="Sugar">
+                        <label for="sugar">Sugar</label>
+
+                        <input type="checkbox" id="eggs" value="Eggs">
+                        <label for="eggs">Eggs</label>
+
+                        <input type="checkbox" id="milk" value="Milk">
+                        <label for="milk">Milk</label>
+
+                        <input type="checkbox" id="butter" value="Butter">
+                        <label for="butter">Butter</label>
+                    </div>
+
+                    <label for="instructions">Instructions:</label>
+                    <textarea id="instructions" rows="4" required></textarea>
+
+                    <label for="prepTime">Preparation Time (mins):</label>
+                    <input type="number" id="prepTime" required>
+
+                    <label for="servings">Servings:</label>
+                    <input type="number" id="servings" required>
+
+                    <label for="category">Category:</label>
+                    <select id="category">
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Dessert">Dessert</option>
+                    </select>
+
+                    <label for="cuisine">Cuisine Type:</label>
+                    <select id="cuisine">
+                        <option value="Italian">Italian</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                    </select>
+
+                    <button type="submit">Add Recipe</button>
+                </form>
+            </div>
+
+            <!-- Right Column: Recipe List (70%) -->
+            <div class="recipe-container">
+                <h2>Recipes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Cuisine</th>
+                            <th>Prep Time</th>
+                            <th>Servings</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recipe-list">
+                        <tr>
+                            <td>Pancakes</td>
+                            <td>Breakfast</td>
+                            <td>American</td>
+                            <td>20</td>
+                            <td>4</td>
+                            <td>
+                                <button class="view">View</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pasta Alfredo</td>
+                            <td>Dinner</td>
+                            <td>Italian</td>
+                            <td>30</td>
+                            <td>2</td>
+                            <td>
+                                <button class="view">View</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Chicken Curry</td>
+                            <td>Lunch</td>
+                            <td>Indian</td>
+                            <td>40</td>
+                            <td>3</td>
+                            <td>
+                                <button class="view">View</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

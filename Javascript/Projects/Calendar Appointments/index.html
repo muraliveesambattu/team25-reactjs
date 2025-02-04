@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Appointments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 95%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            flex: 30%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .appointment-container {
+            flex: 70%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-group input, .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .appointment-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        td button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        td .edit {
+            background: #ffc107;
+            color: black;
+        }
+
+        td .delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        td .edit:hover {
+            background: #e0a800;
+        }
+
+        td .delete:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .form-container, .appointment-container {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calendar Appointments</h1>
+
+        <div class="content">
+            <!-- Left Column: Appointment Entry Form (30%) -->
+            <div class="form-container">
+                <h2>Add Appointment</h2>
+                <form id="appointment-form">
+                    <label for="eventName">Event Name:</label>
+                    <input type="text" id="eventName" required>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" required>
+
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" required>
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" required>
+
+                    <label for="description">Description:</label>
+                    <textarea id="description" rows="3" required></textarea>
+
+                    <label>Event Category:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="meeting" name="category" value="Meeting">
+                        <label for="meeting">Meeting</label>
+
+                        <input type="radio" id="conference" name="category" value="Conference">
+                        <label for="conference">Conference</label>
+
+                        <input type="radio" id="webinar" name="category" value="Webinar">
+                        <label for="webinar">Webinar</label>
+
+                        <input type="radio" id="personal" name="category" value="Personal">
+                        <label for="personal">Personal</label>
+                    </div>
+
+                    <label>Participants:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="alice" value="Alice">
+                        <label for="alice">Alice</label>
+
+                        <input type="checkbox" id="bob" value="Bob">
+                        <label for="bob">Bob</label>
+
+                        <input type="checkbox" id="charlie" value="Charlie">
+                        <label for="charlie">Charlie</label>
+
+                        <input type="checkbox" id="david" value="David">
+                        <label for="david">David</label>
+
+                        <input type="checkbox" id="emma" value="Emma">
+                        <label for="emma">Emma</label>
+                    </div>
+
+                    <button type="submit">Add Appointment</button>
+                </form>
+            </div>
+
+            <!-- Right Column: Appointment List (70%) -->
+            <div class="appointment-container">
+                <h2>Upcoming Appointments</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Location</th>
+                            <th>Category</th>
+                            <th>Participants</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointment-list">
+                        <tr>
+                            <td>Team Meeting</td>
+                            <td>2024-02-20</td>
+                            <td>10:00 AM</td>
+                            <td>Office Room A</td>
+                            <td>Meeting</td>
+                            <td>Alice, Bob</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tech Conference</td>
+                            <td>2024-03-05</td>
+                            <td>2:00 PM</td>
+                            <td>Grand Hall</td>
+                            <td>Conference</td>
+                            <td>Charlie, David</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Webinar on AI</td>
+                            <td>2024-03-10</td>
+                            <td>4:00 PM</td>
+                            <td>Online</td>
+                            <td>Webinar</td>
+                            <td>Emma</td>
+                            <td>
+                                <button class="edit">Edit</button>
+                                <button class="delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Learning App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 95%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            flex: 30%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .vocabulary-container {
+            flex: 70%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-group input, .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #e64a19;
+        }
+
+        .vocabulary-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        td button {
+            padding: 5px 10px;
+            margin: 2px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        td .remove {
+            background: #dc3545;
+            color: white;
+        }
+
+        td .remove:hover {
+            background: #c82333;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .form-container, .vocabulary-container {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Language Learning App</h1>
+
+        <div class="content">
+            <!-- Left Column: Add Word Form (30%) -->
+            <div class="form-container">
+                <h2>Add Vocabulary Word</h2>
+                <form id="word-form">
+                    <label for="word">Word:</label>
+                    <input type="text" id="word" required>
+
+                    <label for="definition">Definition:</label>
+                    <textarea id="definition" rows="2" required></textarea>
+
+                    <label for="exampleSentence">Example Sentence:</label>
+                    <textarea id="exampleSentence" rows="2" required></textarea>
+
+                    <label for="synonyms">Synonyms (comma-separated):</label>
+                    <input type="text" id="synonyms">
+
+                    <label for="antonyms">Antonyms (comma-separated):</label>
+                    <input type="text" id="antonyms">
+
+                    <label>Language:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="english" name="language" value="English">
+                        <label for="english">English</label>
+
+                        <input type="radio" id="spanish" name="language" value="Spanish">
+                        <label for="spanish">Spanish</label>
+
+                        <input type="radio" id="french" name="language" value="French">
+                        <label for="french">French</label>
+
+                        <input type="radio" id="german" name="language" value="German">
+                        <label for="german">German</label>
+                    </div>
+
+                    <label>Progress:</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="learned">
+                        <label for="learned">Learned</label>
+
+                        <input type="checkbox" id="review">
+                        <label for="review">Needs Review</label>
+
+                        <input type="checkbox" id="mastered">
+                        <label for="mastered">Mastered</label>
+                    </div>
+
+                    <button type="submit">Add Word</button>
+                </form>
+            </div>
+
+            <!-- Right Column: Vocabulary List (70%) -->
+            <div class="vocabulary-container">
+                <h2>Vocabulary List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Definition</th>
+                            <th>Example</th>
+                            <th>Synonyms</th>
+                            <th>Antonyms</th>
+                            <th>Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="word-list">
+                        <tr>
+                            <td>Elucidate</td>
+                            <td>Explain clearly</td>
+                            <td>He tried to elucidate the concept.</td>
+                            <td>Clarify, Explain</td>
+                            <td>Confuse</td>
+                            <td>Learned</td>
+                            <td>
+                                <button class="remove">Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pulchritudinous</td>
+                            <td>Physically beautiful</td>
+                            <td>Her pulchritudinous appearance stunned everyone.</td>
+                            <td>Gorgeous, Stunning</td>
+                            <td>Ugly</td>
+                            <td>Needs Review</td>
+                            <td>
+                                <button class="remove">Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ephemeral</td>
+                            <td>Short-lived</td>
+                            <td>Life is ephemeral.</td>
+                            <td>Transient, Fleeting</td>
+                            <td>Permanent</td>
+                            <td>Mastered</td>
+                            <td>
+                                <button class="remove">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Learning Progress</h3>
+                <p>Daily Goal: <strong>10 words</strong></p>
+                <p>Words Learned: <strong>5</strong></p>
+                <p>Achievements: <strong>Basic Vocabulary Badge</strong></p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
