@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <label for="">First Name :</label>
+        <input type="text" name="" id="fname" onkeyup="validateForm()"> <br>
+        <label for="">Email :</label>
+        <input type="text" name="" id="email" onkeyup="validateForm()"> <br>
+        <label for="">Password :</label>
+        <input type="text" name="" id="password" onkeyup="validateForm()"> <br>
+        <button disabled="true">Add Student</button>
+    </form>
+
+    <script>
+
+
+        // on-keydown
+        // on-keyup
+        // on-keypress
+        // on-input
+
+        function validateForm() {
+            var fname = document.getElementById("fname").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            if (fname.length > 5 && email.length > 5 && password.length > 5) {
+                document.querySelector("button").removeAttribute("disabled", "true")
+            } else {
+                document.querySelector("button").setAttribute("disabled", "true")
+            }
+        }
+    </script>
+</body>
+
+</html>
