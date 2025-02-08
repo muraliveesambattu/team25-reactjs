@@ -8,8 +8,17 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 400px;
             margin: auto;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .column {
+            flex: 1;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -38,74 +47,147 @@
             border-radius: 5px;
             cursor: pointer;
             width: 100%;
-            cursor: pointer;
         }
 
         button:disabled {
             background-color: gray;
             cursor: not-allowed;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 
 <body>
+    <h2>Student Enrollment System</h2>
+    <div class="container">
+        <div class="column">
+            <h3>Enrollment Form</h3>
+            <form id="enrollmentForm">
+                <label for="id">ID:</label>
+                <input type="text" id="id" required onkeyup="validateForm()">
 
-    <h2>Student Enrollment Form</h2>
-    <form id="enrollmentForm">
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id" required onkeyup="validateForm()">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required onkeyup="validateForm()">
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required onkeyup="validateForm()">
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="1" required onkeyup="validateForm()">
 
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" min="1" required onkeyup="validateForm()">
+                <label for="gender">Gender:</label>
+                <select id="gender" required onchange="validateForm()">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
 
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required onkeyup="validateForm()">
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
+                <label for="coursesEnrolled">Courses Enrolled:</label>
+                <input type="text" id="coursesEnrolled" required onkeyup="validateForm()">
 
-        <label for="coursesEnrolled">Courses Enrolled:</label>
-        <input type="text" id="coursesEnrolled" name="coursesEnrolled" required onkeyup="validateForm()">
+                <label for="enrollmentDate">Enrollment Date:</label>
+                <input type="date" id="enrollmentDate" required onchange="validateForm()">
 
-        <label for="enrollmentDate">Enrollment Date:</label>
-        <input type="date" id="enrollmentDate" name="enrollmentDate" required onkeyup="validateForm()">
+                <button type="button" disabled onclick="addStudent()">Submit</button>
+            </form>
+        </div>
 
-        <button type="button" disabled>Submit</button>
-    </form>
+        <div class="column">
+            <h3>Enrolled Students</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Courses</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script>
-        function validateForm() {
-            var student={
-                id:document.getElementById("id").value,
-                name:document.getElementById("name").value,
-                age:document.getElementById("age").value,
-                gender:document.getElementById("gender").value,
-                coursesEnrolled:document.getElementById("coursesEnrolled").value,
-                enrollmentDate:document.getElementById("enrollmentDate").value,
-            }
+        var allStudents = JSON.parse(localStorage.getItem("allStudents")) || [];
 
-            console.log(student)
+        function displayStudents() {
+            let tableBody = document.getElementById("studentTableBody");
+            tableBody.innerHTML = "";
+            allStudents.forEach((std, index) => {
+                let row = tableBody.insertRow();
+                Object.values(std).forEach((val) => {
+                    var cell = row.insertCell();
+                    cell.textContent = val;
+                });
 
-            var isInvalid = false;
-            for(a in student){
-                if(student[a] == ""){
-                    isInvalid = true;
-                }
-            }
-
-            if(isInvalid === true){
-                document.querySelector("button").setAttribute("disabled",true)
-            }else{
-                document.querySelector("button").removeAttribute("disabled",true)
-            }
+                let actionsCell = row.insertCell();
+                actionsCell.innerHTML = `<button onclick="editStudent(${index})">Edit</button> <button onclick="deleteStudent(${index})">Delete</button>`;
+            });
         }
-    </script>
 
+        function validateForm() {
+            let fields = ["id", "name", "age", "gender", "coursesEnrolled", "enrollmentDate"];
+            let isValid = fields.every(field => document.getElementById(field).value.trim() !== "");
+            document.querySelector("button").disabled = !isValid;
+        }
+
+        function addStudent() {
+            let student = {
+                id: document.getElementById("id").value,
+                name: document.getElementById("name").value,
+                age: document.getElementById("age").value,
+                gender: document.getElementById("gender").value,
+                courses: document.getElementById("coursesEnrolled").value,
+                date: document.getElementById("enrollmentDate").value,
+            };
+
+            allStudents.push(student);
+            localStorage.setItem("allStudents", JSON.stringify(allStudents));
+            displayStudents();
+            document.getElementById("enrollmentForm").reset();
+            document.querySelector("button").disabled = true;
+        }
+
+        function editStudent(index) {
+            let student = allStudents[index];
+            document.getElementById("id").value = student.id;
+            document.getElementById("name").value = student.name;
+            document.getElementById("age").value = student.age;
+            document.getElementById("gender").value = student.gender;
+            document.getElementById("coursesEnrolled").value = student.courses;
+            document.getElementById("enrollmentDate").value = student.date;
+            allStudents.splice(index, 1);
+            localStorage.setItem("allStudents", JSON.stringify(allStudents));
+            displayStudents();
+        }
+
+        function deleteStudent(index) {
+            allStudents.splice(index, 1);
+            localStorage.setItem("allStudents", JSON.stringify(allStudents));
+            displayStudents();
+        }
+
+        displayStudents();
+    </script>
 </body>
 
 </html>
