@@ -12,14 +12,12 @@
 
         function getData(){
            var getDataDetails = new XMLHttpRequest();
-
            getDataDetails.onreadystatechange =function (){
                 if(getDataDetails.readyState === 4 && getDataDetails.status === 200){
                     var allUsers = JSON.parse(getDataDetails.response)
                     console.log(allUsers)
                 }
            }
-          
            getDataDetails.open("GET","https://jsonplaceholder.typicode.com/users")
            getDataDetails.send()
         }
