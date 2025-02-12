@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var age; // Declare the age variable
+
+        do {
+            age = prompt("Please enter your age (must be greater than 0):");
+
+            // Convert the age from string to number
+            age = Number(age);
+
+            // Check if the input is a valid number and greater than 0
+            if (isNaN(age) || age <= 0) {
+                alert("Invalid age. Please enter a valid number greater than 0.");
+            }
+        } while (isNaN(age) || age <= 0);
+
+        document.write("Your age is: " + age);
+
+    </script>
+</body>
+
+</html>
