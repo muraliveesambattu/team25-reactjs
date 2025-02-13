@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="stoptheInterval()">Stop The Function Loop</button>
+    <script>
+        function sayHello(){
+            console.log("Welcome to Interval Topics !!! ");
+        }
+
+
+        // sayHello()
+        // setTimeout(function (){
+        //     sayHello()
+        // },5000)
+
+       var innt =  setInterval(function (){
+            sayHello()
+        },3000)
+
+        function stoptheInterval(){
+            clearInterval(innt)
+        }
+    </script>
+</body>
+</html>
