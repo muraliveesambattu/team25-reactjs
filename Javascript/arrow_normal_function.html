@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const person = {
+            name: 'John',
+            // greet: () => {
+            //     console.log(this);  // 'this' does not refer to 'person'
+            // },
+            greet: function () {
+                console.log(this);  // 'this' does not refer to 'person'
+            }
+        };
+        person.greet();  // Output: undefined (because 'this' doesn't refer to 'person')
+
+    </script>
+</body>
+
+</html>

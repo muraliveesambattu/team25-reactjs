@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Chittoor</title>
+    <style>
+        /* Add your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6f79a8, #a8c0d4);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .weather-container {
+            background-color: #fff;
+            border-radius: 15px;
+            width: 600px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .weather-info {
+            margin-top: 20px;
+        }
+
+        .weather-icon img {
+            width: 50px;
+            height: 50px;
+        }
+
+        h1, h2 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 18px;
+            color: #888;
+        }
+        #weatherInfo{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <input type="text" name="" id="city"> <button onclick="getWeatherForCity()">Get Weather</button>
+        <div class="weather-info" id="weatherInfo">
+            <h1 id="city-name"></h1>
+            <h2 id="temperature">Loading...</h2>
+            <p id="humidity">Humidity: Loading...</p>
+            <p id="wind-speed">Wind Speed: Loading...</p>
+        </div>
+    </div>
+
+    <script>
+    
+        
+        
+        // https://api.weatherstack.com/current?access_key=cd21609a28a704b68a8e3366b82da711&query=New%20York
+        // API Key from OpenWeatherMap
+        var apiKey = 'cd21609a28a704b68a8e3366b82da711'; // Your provided API key
+        function getWeatherForCity(){
+            var cityName = document.getElementById("city").value
+            var url = "https://api.weatherstack.com/current?access_key=cd21609a28a704b68a8e3366b82da711&query="+cityName;
+            document.getElementById("city-name").innerHTML = cityName;
+
+            var newInfo = new XMLHttpRequest();
+            newInfo.onreadystatechange = function (){
+                if(newInfo.readyState == 4 & newInfo.status == 200){
+                    var data = JSON.parse(newInfo.response)
+                    document.getElementById("weatherInfo").style.display = "block"
+                    console.log(data.current)
+                    document.getElementById("humidity").innerHTML = "Humidity : " + data.current.humidity
+                    document.getElementById("wind-speed").innerHTML = "Wind speed : " + data.current.wind_speed
+                    document.getElementById("temperature").innerHTML = "Temperature : " + data.current.temperature
+                }
+            }
+
+            newInfo.open("GET",url);
+            newInfo.send();
+        }
+        // Fetch the weather data
+    </script>
+</body>
+</html>
