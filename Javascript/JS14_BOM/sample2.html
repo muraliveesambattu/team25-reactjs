@@ -60,20 +60,25 @@
   </div>
 
   <script>
-    var allUsers = [
-      {
-        fullName: "Ram ",
-        email: "ram@gmail.com"
-      },
-      {
-        fullName: "kiran ",
-        email: "kiran@gmail.com"
-      },
-      {
-        fullName: "Kumar ",
-        email: "kumar@gmail.com"
-      }
-    ]
+    var allUsers = JSON.parse(localStorage.getItem("allUsers"))
+    if (allUsers === null) {
+      allUsers = [
+        {
+          fullName: "Ram ",
+          email: "ram@gmail.com"
+        },
+        {
+          fullName: "kiran ",
+          email: "kiran@gmail.com"
+        },
+        {
+          fullName: "Kumar ",
+          email: "kumar@gmail.com"
+        }
+      ]
+    }
+
+    console.log(allUsers)
     function registerUser() {
       var fullName = document.getElementById("fullName").value;
       var email = document.getElementById("email").value;
@@ -130,12 +135,8 @@
     }
     var gIndex;
     function editUser(i) {
-      gIndex = i;
-      document.getElementById("fullName").value = allUsers[i].fullName;
-      document.getElementById("email").value = allUsers[i].email
-
-      document.getElementById("updateBtn").style.display = "block"
-      document.getElementById("registerBtn").style.display = "none"
+      localStorage.setItem("allUsers", JSON.stringify(allUsers))
+      window.location.href = "edit.html?" + i
     }
 
 
@@ -149,10 +150,10 @@
 
       allUsers[gIndex] = user;
       displayUsersInTable();
-       document.getElementById("fullName").value = "";
+      document.getElementById("fullName").value = "";
       document.getElementById("email").value = ""
 
-       document.getElementById("updateBtn").style.display = "none"
+      document.getElementById("updateBtn").style.display = "none"
       document.getElementById("registerBtn").style.display = "block"
     }
   </script>
