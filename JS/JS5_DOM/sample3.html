@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        .sample{
+            text-decoration: underline;
+            color: blue;
+        }
+
+        .success{
+            color: green;
+            text-decoration: dashed;
+    
+        }
+    </style>
+</head>
+<body>
+    <h2 class="sample">Hello </h2>
+    <button onclick="changeHeadingColor()">Change</button>
+    <script>
+        function changeHeadingColor(){
+            // document.getElementsByClassName("myHeading")[0].style.color="Green"
+            document.querySelector("h2").setAttribute("class","success")
+        }
+    </script>
+</body>
+</html>
