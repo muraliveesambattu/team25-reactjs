@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="myuser.php">
+        <label for="">First Name </label>
+        <input type="text" name="" id="fname"> <br>
+        <label for="">Last Name </label>
+        <input type="text" name="" id="lname"> <br>
+        <label for="">Email </label>
+        <input type="text" name="" id="email"> <br>
+        <button type="button" onclick="createUser()">Create User</button>
+        <button type="button" onclick="updateUser()">Update User</button>
+    </form>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name </th>
+                <th>Last Name </th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        // CREATE 
+        // READ 
+        // UPDATE 
+        // DELETE 
+
+        var users = [];
+
+        function createUser() {
+            // 1. Get the Filled in the above HTML form 
+            // 2. Add that Data as an Object in to the Araay 
+
+            var user = {
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                email: document.getElementById("email").value
+            }
+
+            users.push(user)
+            resetForm();
+            readUsers()
+        };
+        function readUsers() { 
+            document.querySelector("tbody").innerHTML = "";
+                        for(i=0;i<users.length;i++){
+                var myTr = document.createElement("tr")
+                for(a in users[i]){
+                    var myTd = document.createElement("td");
+                    myTd.innerHTML = users[i][a]
+                    myTr.appendChild(myTd)
+                }
+                var editTd = document.createElement("td");
+                var deleteTd = document.createElement("td");
+                
+                var editBtn = document.createElement("button");
+                editBtn.setAttribute("onClick","editUser("+i+")");
+                editBtn.innerHTML = "EDIT"
+                var deleteBtn = document.createElement("button");
+                deleteBtn.setAttribute("onClick","deleteuser("+i+")")
+                deleteBtn.innerHTML = "DELETE"
+                editTd.appendChild(editBtn)
+                deleteTd.appendChild(deleteBtn)
+                myTr.appendChild(editTd)
+                myTr.appendChild(deleteTd)
+
+                document.querySelector("tbody").appendChild(myTr)
+            }
+        };
+        var gIndex;
+        function editUser(i){
+            gIndex = i;
+            var userToBeEdit = users[i];
+            document.getElementById("fname").value = userToBeEdit.fname
+            document.getElementById("lname").value = userToBeEdit.fname
+            document.getElementById("email").value = userToBeEdit.fname
+        
+            console.log(i)
+        }
+        function updateUser() { 
+
+            var user = {
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                email: document.getElementById("email").value
+            }
+
+            users[gIndex]=user;
+            resetForm();
+            readUsers();
+        };
+        function deleteuser(i) { 
+            users.splice(i,1);
+            readUsers()
+        };
+
+        function resetForm() {
+            document.querySelector("form").reset()
+        }
+    </script>
+</body>
+
+</html>
