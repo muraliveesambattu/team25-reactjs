@@ -1,0 +1,9 @@
+1. Created a folder "local-server";
+2. run "npm init --yes";
+3. run "npm install json-server" ;
+4. create a file called db.json ;
+5. create an objcect ;
+// {
+//     users:[]
+// }
+6. run "json-server --watch db.json";
