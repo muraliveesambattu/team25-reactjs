@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin: 1rem 0;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        .success { background-color: #dff0d8; color: #3c763d; }
+        .error { background-color: #f2dede; color: #a94442; }
+        .warning { background-color: #fcf8e3; color: #8a6d3b; }
+        #previousGuesses {
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        #gameStats {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between 1 and 100. You have 10 attempts!</p>
+        
+        <div class="input-group">
+            <input type="number" id="guessInput" min="1" max="100" placeholder="Enter your guess">
+            <button id="guessButton" class="btn">Submit Guess</button>
+        </div>
+        
+        <div id="message"></div>
+        <div id="previousGuesses"></div>
+        <div id="gameStats"></div>
+        
+        <button id="newGameButton" class="btn" style="display: none;">Start New Game</button>
+    </div>
+
+    <script>
+        // Game state object
+        const gameState = {
+            targetNumber: null,
+            attempts: 0,
+            maxAttempts: 10,
+            previousGuesses: [],
+            isGameOver: false
+        };
+
+        // DOM Elements
+        const elements = {
+            guessInput: document.getElementById('guessInput'),
+            guessButton: document.getElementById('guessButton'),
+            message: document.getElementById('message'),
+            previousGuesses: document.getElementById('previousGuesses'),
+            gameStats: document.getElementById('gameStats'),
+            newGameButton: document.getElementById('newGameButton')
+        };
+
+        // Initialize the game
+        const startGame = () => {
+            gameState.targetNumber = Math.floor(Math.random() * 100) + 1;
+            gameState.attempts = 0;
+            gameState.previousGuesses = [];
+            gameState.isGameOver = false;
+            
+            elements.guessInput.value = '';
+            elements.message.textContent = '';
+            elements.message.className = '';
+            elements.previousGuesses.textContent = '';
+            elements.newGameButton.style.display = 'none';
+            elements.guessInput.disabled = false;
+            elements.guessButton.disabled = false;
+            
+            updateGameStats();
+        };
+
+        // Check the player's guess
+        const checkGuess = (guess) => {
+            try {
+                const numberGuess = parseInt(guess);
+                
+                if (isNaN(numberGuess)) {
+                    throw new Error('Please enter a valid number.');
+                }
+                
+                if (numberGuess < 1 || numberGuess > 100) {
+                    throw new Error('Please enter a number between 1 and 100.');
+                }
+                
+                gameState.attempts++;
+                gameState.previousGuesses.push(numberGuess);
+                
+                if (numberGuess === gameState.targetNumber) {
+                    handleWin();
+                } else if (gameState.attempts >= gameState.maxAttempts) {
+                    handleLoss();
+                } else {
+                    const message = numberGuess < gameState.targetNumber ? 'Too low!' : 'Too high!';
+                    displayMessage(message, 'warning');
+                }
+                
+                updatePreviousGuesses();
+                updateGameStats();
+                
+            } catch (error) {
+                displayMessage(error.message, 'error');
+            }
+        };
+
+        // Handle win condition
+        const handleWin = () => {
+            const message = `Congratulations! You found the number ${gameState.targetNumber} in ${gameState.attempts} attempts!`;
+            displayMessage(message, 'success');
+            endGame();
+            saveScore();
+        };
+
+        // Handle loss condition
+        const handleLoss = () => {
+            const message = `Game Over! The number was ${gameState.targetNumber}.`;
+            displayMessage(message, 'error');
+            endGame();
+        };
+
+        // End the game
+        const endGame = () => {
+            gameState.isGameOver = true;
+            elements.guessInput.disabled = true;
+            elements.guessButton.disabled = true;
+            elements.newGameButton.style.display = 'block';
+        };
+
+        // Display message to the user
+        const displayMessage = (message, type) => {
+            elements.message.textContent = message;
+            elements.message.className = type;
+        };
+
+        // Update previous guesses display
+        const updatePreviousGuesses = () => {
+            elements.previousGuesses.textContent = `Previous guesses: ${gameState.previousGuesses.join(', ')}`;
+        };
+
+        // Save score to localStorage
+        const saveScore = () => {
+            const highScores = JSON.parse(localStorage.getItem('numberGameScores') || '[]');
+            highScores.push({
+                attempts: gameState.attempts,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('numberGameScores', JSON.stringify(highScores));
+        };
+
+        // Update game statistics
+        const updateGameStats = () => {
+            const highScores = JSON.parse(localStorage.getItem('numberGameScores') || '[]');
+            const bestScore = highScores.length > 0 
+                ? Math.min(...highScores.map(score => score.attempts))
+                : '-';
+            
+            elements.gameStats.innerHTML = `
+                <p>Games played: ${highScores.length}</p>
+                <p>Best score: ${bestScore}</p>
+                <p>Current attempt: ${gameState.attempts}/${gameState.maxAttempts}</p>
+            `;
+        };
+
+        // Event Listeners
+        elements.guessButton.addEventListener('click', () => {
+            checkGuess(elements.guessInput.value);
+            elements.guessInput.value = '';
+            elements.guessInput.focus();
+        });
+
+        elements.guessInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                checkGuess(elements.guessInput.value);
+                elements.guessInput.value = '';
+            }
+        });
+
+        elements.newGameButton.addEventListener('click', startGame);
+
+        // Start the game when the page loads
+        startGame();
+    </script>
+</body>
+</html>

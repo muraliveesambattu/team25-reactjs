@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .won { background-color: #e6ffe6; }
+        .lost { background-color: #ffe6e6; }
+
+        input, button {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        #message {
+            min-height: 25px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Guessing Game</h1>
+        <p>Guess a number between 1 and 100</p>
+        <input type="number" id="guessInput" placeholder="Enter guess">
+        <button id="guessButton">Submit Guess</button>
+        <div id="message"></div>
+        <div id="attempts">Attempts left: 10</div>
+        <div id="previousGuesses">Previous guesses: </div>
+        <div id="highscore">Best score: N/A</div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const guessInput = document.getElementById('guessInput');
+        const guessButton = document.getElementById('guessButton');
+        const messageDiv = document.getElementById('message');
+        const attemptsDiv = document.getElementById('attempts');
+        const previousGuessesDiv = document.getElementById('previousGuesses');
+        const highscoreDiv = document.getElementById('highscore');
+
+        // Game State
+        let game = {
+            target: null,
+            attemptsLeft: 10,
+            guesses: [],
+            isActive: false
+        };
+
+        // High Score
+        let highScore = parseInt(localStorage.getItem('highScore')) || Infinity;
+
+        // Initialize Game
+        function startGame() {
+            game.target = Math.floor(Math.random() * 100) + 1;
+            game.attemptsLeft = 10;
+            game.guesses = [];
+            game.isActive = true;
+            
+            // Reset UI
+            messageDiv.textContent = '';
+            attemptsDiv.textContent = `Attempts left: ${game.attemptsLeft}`;
+            previousGuessesDiv.textContent = 'Previous guesses: ';
+            guessInput.value = '';
+            document.body.className = '';
+            guessButton.textContent = 'Submit Guess';
+            
+            // Update high score display
+            highscoreDiv.textContent = `Best score: ${
+                highScore !== Infinity ? highScore : 'N/A'
+            }`;
+        }
+
+        // Handle Game Logic
+        function handleGuess() {
+            const guess = parseInt(guessInput.value);
+            
+            // Input Validation
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                messageDiv.textContent = 'Please enter a number between 1-100!';
+                guessInput.value = '';
+                return;
+            }
+
+            // Update game state
+            game.guesses.push(guess);
+            game.attemptsLeft--;
+            guessInput.value = '';
+
+            // Check guess using switch statement
+            switch (true) {
+                case guess === game.target:
+                    messageDiv.textContent = '🎉 Correct! You won!';
+                    endGame(true);
+                    break;
+                case game.attemptsLeft === 0:
+                    messageDiv.textContent = `💀 Game Over! Number was ${game.target}`;
+                    endGame(false);
+                    break;
+                default:
+                    const hint = guess > game.target ? '📈 Too high!' : '📉 Too low!';
+                    messageDiv.textContent = `${hint} - Attempts left: ${game.attemptsLeft}`;
+                    previousGuessesDiv.textContent = 
+                        `Previous guesses: ${game.guesses.join(', ')}`;
+                    attemptsDiv.textContent = `Attempts left: ${game.attemptsLeft}`;
+            }
+        }
+
+        // End Game
+        function endGame(won) {
+            game.isActive = false;
+            document.body.className = won ? 'won' : 'lost';
+            
+            // Update high score
+            if (won) {
+                const score = game.guesses.length;
+                if (score < highScore) {
+                    highScore = score;
+                    localStorage.setItem('highScore', highScore);
+                    highscoreDiv.textContent = `Best score: ${highScore}`;
+                }
+            }
+            
+            guessButton.textContent = 'Play Again';
+        }
+
+        // Event Listeners
+        guessButton.addEventListener('click', () => {
+            game.isActive ? handleGuess() : startGame();
+        });
+
+        guessInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') game.isActive ? handleGuess() : startGame();
+        });
+
+        // Start initial game
+        startGame();
+    </script>
+</body>
+</html>
