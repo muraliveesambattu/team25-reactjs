@@ -27,7 +27,7 @@ import { use, view } from 'react-dom-factories';
 import AssetMaximizeView from './AssetMaximizeView/AssetMaximizeViewContainer';
 import { AssetMaximizeViewAction } from './AssetMaximizeView/AssetMaximizeView-actions';
 import { bindActionCreators } from 'redux';
-import AssetOpenTasksChart from './AssetOpenTasksChart/AssetOpenTasksChart';
+import AssetOpenTasksChart from './AssetOpenTasksChart';
 import { AssetMgmtMultiselectDropdown } from './AssetMgmtMultiselectDropdown';
 import { AssetSearchMultiselectDropdownV2 } from './AssetDropdown/AssetSearchMultiselectDropdownV2';
 import CustomRenderer from './agGrid/CustomRenderer';
