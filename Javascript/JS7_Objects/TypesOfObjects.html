@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var newPerson = {
+            city: "Chittoor",
+            fname: "Murali"
+        };  // Literal Way fo Creating Object 
+
+        function NewPersonObj(fname, lname) {
+            this.fname = fname;
+            this.lname = lname;
+            this.city= "Chittoor"
+
+        }
+
+        var person1 = new NewPersonObj("Ram", "Ravi") // Creating An Object with Constructor Function 
+
+        var student = new Object({
+            fname: "Ram", city: "Chittoor",
+        }) // Crearing an Object with Built In Methods 
+
+        console.log("Literal Way >> ", newPerson);
+        console.log("Constructor Function >> ", person1);
+        console.log("Built In Method >> ", student)
+    </script>
+</body>
+
+</html>

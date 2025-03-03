@@ -4,6 +4,7 @@ import Murali from "./ClassComponents/MuraliClass";
 import Jaga from "./ClassComponents/JagaClass";
 import Yamuna from "./ClassComponents/YamunaClass";
 import Bhavya from "./Bhavya";
+import Person, { NewPerson } from "./ClassComponents/Person";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
       <Jaga />
       <hr />
       <Yamuna /> */}
-      <Bhavya/>
+      {/* <Bhavya/> */}
+      <Person />
+      {/* <NewPerson /> */}
     </div>
   );
 }

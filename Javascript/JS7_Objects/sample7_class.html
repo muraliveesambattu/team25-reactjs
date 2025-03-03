@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var ancs ="some"
+        class Common {
+            constructor() {
+                this.state = "Andhra";
+                this.district = "Chittoor";
+                this.course = "Front End Development "
+            }
+        }
+        class Person extends Common {
+            constructor(fname, lname, email) {
+                super();
+                this.fname = fname;
+                this.lname = lname;
+                this.email = email;
+
+            }
+        }
+
+        var person1 = new Person("Ram", "Krishn", "ram@gmail.com");
+        var person2 = new Person("Ravi", "Kiran", "ravi@gmail.com");
+        var person3 = new Person("sam", "kumar", "sam@gmail.com");
+
+        console.log(person1);
+        console.log(person2);
+        console.log(person3);
+    </script>
+</body>
+
+</html>
