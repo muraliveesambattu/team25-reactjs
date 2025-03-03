@@ -5,18 +5,14 @@ import Jaga from "./ClassComponents/JagaClass";
 import Yamuna from "./ClassComponents/YamunaClass";
 import Bhavya from "./Bhavya";
 import Person, { NewPerson } from "./ClassComponents/Person";
+import { Student } from "./ClassComponents/Student";
+import { ParentUser } from "./ClassComponents/ParentUser";
 
 function App() {
   return (
     <div className="App">
-      {/* <Murali />
-      <hr />
-      <Jaga />
-      <hr />
-      <Yamuna /> */}
-      {/* <Bhavya/> */}
-      <Person />
-      {/* <NewPerson /> */}
+        {/* <Student/> */}
+        <ParentUser/>
     </div>
   );
 }
