@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+    <form>
+        <label for="">ID</label>
+        <input type="text" name="" id="id"> <br>
+        <label for="">Name</label>
+        <input type="text" name="" id="name"> <br>
+        <label for="">Email</label>
+        <input type="text" name="" id="email"> <br>
+        <label for="">Age</label>
+        <input type="text" name="" id="age"> <br>
+        <button type="button" onclick="createUser()" id="addUserBtn">Add User</button>
+        <button type="button" onclick="updateUser()" id="updateUserBtn" style="display: none;">Update User</button>
+    </form>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>                
+                <th>Name</th>
                 <th>Email</th>
                 <th>Age</th>
                 <th>Edit</th>
@@ -22,15 +36,29 @@
     <script>
         var allUsers = JSON.parse(localStorage.getItem("allUsers"));
         console.log(allUsers);
- 
+
         // Create 
+
+        function createUser() {
+            var user = {
+                id: document.getElementById("id").value,
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                age: document.getElementById("age").value
+            }
+            allUsers.push(user);
+            localStorage.setItem("allUsers", JSON.stringify(allUsers))
+
+            displayUsers();
+        }
         // Read 
-        function displayUsers(){
-            allUsers.forEach(function (user,index){
+        function displayUsers() {
+            document.querySelector("tbody").innerHTML = ""; // Clearing the Table to Display Latest Available Data
+            allUsers.forEach(function (user, index) {
                 console.log(user)
                 var myTr = document.createElement("tr");
-                for(a in user){
-                    if(a !== "address"){
+                for (a in user) {
+                    if (a !== "address") {
                         var myTd = document.createElement("td");
                         myTd.innerHTML = user[a];
                         myTr.appendChild(myTd)
@@ -41,20 +69,56 @@
 
                 var editBtn = document.createElement("button");
                 editBtn.innerHTML = "Edit"
+                editBtn.setAttribute("onclick", "editUser(" + index + ")");
                 var deleteBtn = document.createElement("button");
+                deleteBtn.setAttribute("onclick", "deleteUser(" + index + ")")
                 deleteBtn.innerHTML = "Delete";
 
                 editTd.appendChild(editBtn);
                 deleteTd.appendChild(deleteBtn)
                 myTr.appendChild(editTd);
                 myTr.appendChild(deleteTd);
-                
+
                 document.querySelector("tbody").appendChild(myTr);
             })
         }
         displayUsers();
         // Update 
+        var gIndex;
+        function editUser(i) {
+            gIndex = i;
+            document.getElementById("id").value = allUsers[i].id
+            document.getElementById("name").value = allUsers[i].name
+            document.getElementById("email").value = allUsers[i].email
+            document.getElementById("age").value = allUsers[i].age
+
+            document.getElementById('updateUserBtn').style.display = "block"
+            document.getElementById('addUserBtn').style.display = "none"
+        }
+
+        function updateUser(){
+            var user = {
+                id: document.getElementById("id").value,
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                age: document.getElementById("age").value
+            }
+            allUsers[gIndex] = user;
+            localStorage.setItem("allUsers", JSON.stringify(allUsers))
+            displayUsers();
+            document.querySelector("form").reset();
+            document.getElementById('updateUserBtn').style.display = "none"
+            document.getElementById('addUserBtn').style.display = "block"
+        }
         // Delete 
+
+        function deleteUser(index) {
+            allUsers.splice(index, 1);
+            localStorage.setItem("allUsers", JSON.stringify(allUsers))
+            displayUsers();
+
+        }
     </script>
 </body>
+
 </html>
