@@ -9,7 +9,12 @@ class User extends Component {
         lname: "",
         email: "",
       },
-      users: [],
+      users: [
+        { fname: "Ram", lname: "Kumar", email: "ram@gmail.com" },
+        { fname: "Sam", lname: "Kumar", email: "sam@gmail.com" },
+        { fname: "Kiran", lname: "Kumar", email: "ram@gmail.com" },
+      ],
+      editIndex: null,
     };
   }
   handleChange = (e) => {
@@ -24,6 +29,28 @@ class User extends Component {
     newUsers.push(this.state.person);
     this.setState({ users: newUsers });
     console.log(this.state.person);
+    this.clearUser();
+  };
+
+  clearUser = () => {
+    this.setState({ person: { fname: "", lname: "", email: "" } });
+  };
+
+  handleDelete = (i) => {
+    const newUsers = [...this.state.users];
+    newUsers.splice(i, 1);
+    this.setState({ users: newUsers });
+  };
+
+  handleEdit = (user, i) => {
+    this.setState({ person: user, editIndex: i });
+  };
+
+  handleUpdate = () => {
+    const newUsers = [...this.state.users];
+    newUsers[this.state.editIndex] = this.state.person;
+    this.setState({ users: newUsers, editIndex: null });
+    this.clearUser()
   };
   render() {
     return (
@@ -56,19 +83,52 @@ class User extends Component {
             onChange={this.handleChange}
           />{" "}
           <br />
-          <button type="button" onClick={this.addUser}>
-            Add User
-          </button>
+          {this.state.editIndex === null ? (
+            <button type="button" onClick={this.addUser}>
+              Add User
+            </button>
+          ) : (
+            <button type="button" onClick={this.handleUpdate}>
+              Update User
+            </button>
+          )}
         </form>
 
         <hr />
-        {this.state.users.map(function (user){
-            return <ul>
-                <li>{user.fname}</li>
-                <li>{user.lname}</li>
-                <li>{user.email}</li>
-            </ul>
-        })}
+        <table border={1}>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.users.map((user, i) => {
+              return (
+                <tr key={i}>
+                  <td>{user.fname}</td>
+                  <td>{user.lname}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        this.handleEdit(user, i);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => this.handleDelete(i)}>Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
