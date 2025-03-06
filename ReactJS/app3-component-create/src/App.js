@@ -7,12 +7,16 @@ import Bhavya from "./Bhavya";
 import Person, { NewPerson } from "./ClassComponents/Person";
 import { Student } from "./ClassComponents/Student";
 import { ParentUser } from "./ClassComponents/ParentUser";
+import { BhavyaClassComp } from "./ClassComponents/Bhavya";
+import Jagadeesh from "./ClassComponents/Jagadeesh";
 
 function App() {
   return (
     <div className="App">
         {/* <Student/> */}
-        <ParentUser/>
+        {/* <ParentUser/> */}
+        {/* <BhavyaClassComp/> */}
+        <Jagadeesh/>
     </div>
   );
 }

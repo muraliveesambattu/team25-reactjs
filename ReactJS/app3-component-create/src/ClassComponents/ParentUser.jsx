@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ChildUsers from "./ChildUsers";
-
+import './myStyles.css'
 export class ParentUser extends Component {
   constructor() {
     super();
@@ -26,8 +26,8 @@ export class ParentUser extends Component {
   render() {
     return (
       <div>
-        <h2>Welcome to Parent User</h2>
-        <button onClick={this.handleObjectChange}>Change Object Details</button>
+        <h2 style={{background:"red",color:'white'}}>Welcome to Parent User</h2>
+        <button onClick={this.handleObjectChange} className="myObject">Change Object Details</button>
         <ul>
           <li>{this.state.person.fname}</li>
           <li>{this.state.person.lname}</li>
