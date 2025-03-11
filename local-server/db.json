@@ -12,5 +12,31 @@
       "email": "rahul.sharma@example.com",
       "id": 3
     }
+  ],
+  "students": [
+    {
+      "name": "Murali Veesambattu",
+      "email": "murali.veesambattu@gmail.com",
+      "contact": "9999999",
+      "id": 1
+    },
+    {
+      "name": "SEKHAR HYDE PARK",
+      "email": "vmurali100@gmail.com",
+      "contact": "99990090",
+      "id": 2
+    },
+    {
+      "name": "Murali Veesambattu",
+      "email": "murali.veesambattu@gmail.com",
+      "contact": "8989898989",
+      "id": 3
+    },
+    {
+      "name": "Murali VMR MKMK",
+      "email": "murali.veesambattu@gmail.com",
+      "contact": "12345566",
+      "id": 4
+    }
   ]
 }
