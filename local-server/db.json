@@ -1,16 +1,16 @@
 {
   "users": [
     {
-      "fname": "Murali",
-      "lname": "Veesambattu",
-      "email": "murali.veesambattu@gmail.com",
-      "id": 1
-    },
-    {
       "fname": "SEKHAR",
       "lname": "PARK-New",
       "email": "vmurali100@gmail.com",
       "id": 2
+    },
+    {
+      "fname": "RAHUL",
+      "lname": "SHARMA",
+      "email": "rahul.sharma@example.com",
+      "id": 3
     }
   ]
 }
