@@ -38,5 +38,38 @@
       "contact": "12345566",
       "id": 4
     }
+  ],
+  "movieTickets":[
+    {
+      "seatNumber": "A1",
+      "isBooked": "true",
+      "category": "VIP",
+      "userID": "U123"
+    },
+    {
+      "seatNumber": "B5",
+      "isBooked": "false",
+      "category": "Regular",
+      "userID": null
+    },
+    {
+      "seatNumber": "C10",
+      "isBooked": "true",
+      "category": "Economy",
+      "userID": "U456"
+    },
+    {
+      "seatNumber": "D2",
+      "isBooked": "false",
+      "category": "VIP",
+      "userID": null
+    },
+    {
+      "seatNumber": "E8",
+      "isBooked": "true",
+      "category": "Regular",
+      "userID": "U789"
+    }
   ]
+  
 }
