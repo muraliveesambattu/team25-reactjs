@@ -39,37 +39,55 @@
       "id": 4
     }
   ],
-  "movieTickets":[
+  "movieTickets": [
     {
       "seatNumber": "A1",
       "isBooked": "true",
       "category": "VIP",
-      "userID": "U123"
+      "userID": "U123",
+      "id": 1
     },
     {
       "seatNumber": "B5",
       "isBooked": "false",
       "category": "Regular",
-      "userID": null
+      "userID": "U144",
+      "id": 2
     },
     {
       "seatNumber": "C10",
       "isBooked": "true",
       "category": "Economy",
-      "userID": "U456"
+      "userID": "U456",
+      "id": 3
     },
     {
       "seatNumber": "D2",
       "isBooked": "false",
       "category": "VIP",
-      "userID": null
+      "userID": "U112",
+      "id": 4
     },
     {
       "seatNumber": "E8",
       "isBooked": "true",
       "category": "Regular",
-      "userID": "U789"
+      "userID": "U789",
+      "id": 5
+    },
+    {
+      "seatNumber": "A12",
+      "isBooked": "true",
+      "category": "VIP",
+      "userID": "U32",
+      "id": 6
+    },
+    {
+      "seatNumber": "45",
+      "isBooked": "True",
+      "category": "VIP",
+      "userID": "U42",
+      "id": 7
     }
   ]
-  
 }
