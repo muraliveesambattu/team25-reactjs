@@ -4,15 +4,17 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import ClickCounterDemo from "./Components/ClickCounterDemo";
 import HoverCounterDemo from "./Components/HoverCounterDemo";
+import MainComponent from "./Context-Components/MainComponent";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <ClickCounterDemo />
+      {/* <ClickCounterDemo />
       <hr />
-      <HoverCounterDemo />
+      <HoverCounterDemo /> */}
+      <MainComponent/>
     </>
   );
 }
