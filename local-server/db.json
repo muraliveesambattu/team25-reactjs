@@ -1,16 +1,11 @@
 {
   "users": [
     {
-      "fname": "SEKHAR",
-      "lname": "PARK-New",
-      "email": "vmurali100@gmail.com",
-      "id": 2
-    },
-    {
-      "fname": "RAHUL",
-      "lname": "SHARMA",
-      "email": "rahul.sharma@example.com",
-      "id": 3
+      "fname": "mkur",
+      "lname": "infotech",
+      "email": "vmrinfotech25@gmail.com",
+      "password": "123",
+      "id": 1
     }
   ],
   "students": [
