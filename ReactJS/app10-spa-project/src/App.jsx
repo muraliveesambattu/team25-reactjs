@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import UserDetails from "./Components/UserDetails";
+import NavBar from "./Components/NavBar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,11 +14,12 @@ function App() {
   return (
     <>
       <Router>
+        <NavBar />
         <Routes>
           <Route path="" element={<Registration />} />
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="userdetails" element={<UserDetails />} />
+          <Route path="userdetails/:id" element={<UserDetails />} />
         </Routes>
       </Router>
     </>

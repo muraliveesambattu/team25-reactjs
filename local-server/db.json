@@ -6,6 +6,27 @@
       "email": "vmrinfotech25@gmail.com",
       "password": "123",
       "id": 1
+    },
+    {
+      "fname": "mm",
+      "lname": "kk",
+      "email": "mm@gmail.com",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "fname": "SSS",
+      "lname": "KKK",
+      "email": "sss@gmail.omc",
+      "password": "ddd",
+      "id": 3
+    },
+    {
+      "fname": "Bhavya",
+      "lname": "sri",
+      "email": "bhavya@gmail.com",
+      "password": "111233",
+      "id": 4
     }
   ],
   "students": [
