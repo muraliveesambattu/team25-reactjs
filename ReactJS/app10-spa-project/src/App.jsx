@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import UserDetails from "./Components/UserDetails";
 import NavBar from "./Components/NavBar";
+import CrudUsers from "./Components/CRUD";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,6 +21,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="userdetails/:id" element={<UserDetails />} />
+          <Route path="crud" element={<CrudUsers />} />
+
         </Routes>
       </Router>
     </>
