@@ -8,7 +8,7 @@
       "id": 1
     },
     {
-      "fname": "mm",
+      "fname": "RDSD",
       "lname": "kk",
       "email": "mm@gmail.com",
       "password": "123",
@@ -27,6 +27,13 @@
       "email": "bhavya@gmail.com",
       "password": "111233",
       "id": 4
+    },
+    {
+      "fname": "Ram",
+      "lname": "Ravi",
+      "email": "Ram@gmail.com",
+      "password": "111233",
+      "id": 5
     }
   ],
   "students": [
