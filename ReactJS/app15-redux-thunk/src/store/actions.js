@@ -23,7 +23,6 @@ export const getUserAction = (user) => {
     } catch (error) {}
   };
 };
-
 export const deleteUserAction = (user) => {
   return async (dispatch) => {
     try {
@@ -36,7 +35,6 @@ export const deleteUserAction = (user) => {
     } catch (error) {}
   };
 };
-
 export const updateUserAction = (user) => {
   return async (dispatch) => {
     try {
