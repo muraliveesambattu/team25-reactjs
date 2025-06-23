@@ -5,6 +5,7 @@ import "./App.css";
 import ClickCounterDemo from "./Components/ClickCounterDemo";
 import HoverCounterDemo from "./Components/HoverCounterDemo";
 import MainComponent from "./Context-Components/MainComponent";
+import SampleComponent from "./Components/SampleComponent";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,7 +15,8 @@ function App() {
       {/* <ClickCounterDemo />
       <hr />
       <HoverCounterDemo /> */}
-      <MainComponent/>
+      {/* <MainComponent/> */}
+      <SampleComponent/>
     </>
   );
 }
